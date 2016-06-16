@@ -6,11 +6,15 @@ from waflib import Options
 
 def options(ctx):
 	ctx.load('compiler_cxx')
+	if sys.platform in ["msys", "win32"]:
+		ctx.load('winres')
 	gr = ctx.get_option_group('configure options')
 	gr.add_option('--release', action='store_true', help='build release binaries')
 
 def configure(ctx):
 	ctx.load('compiler_cxx')
+	if sys.platform in ["msys", "win32"]:
+		ctx.load('winres')
 
 	if Options.options.release:
 		ctx.env.CXXFLAGS = ['-O2']
@@ -29,8 +33,11 @@ def configure(ctx):
 	ctx.check_cfg(args='--cflags --libs', package='openssl', uselib_store='OPENSSL')
 
 def build(ctx):
+	source_files = ctx.path.ant_glob('src/*.cpp')
+	if sys.platform in ["msys", "win32"]:
+		source_files.append("src/windows/main.rc")
 	ctx.program(
-		source=ctx.path.ant_glob('src/*.cpp'),
+		source=source_files,
 		target='pwcalculator',
 		use='WXWIDGETS',
 	)

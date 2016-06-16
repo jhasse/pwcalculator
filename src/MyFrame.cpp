@@ -19,6 +19,11 @@ textSecret(new wxTextCtrl(
 	this, ID_SECRET, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER | wxTE_PASSWORD
 )),
 icon("pwcalculator.svg") {
+#ifdef _WIN32
+	SetIcon(wxICON(MAINICON));
+#else
+	SetIcon(icon);
+#endif
 	auto vbox = new wxBoxSizer(wxVERTICAL);
 
 	vbox->Add(
@@ -40,7 +45,6 @@ icon("pwcalculator.svg") {
 		button, 1, wxEXPAND | wxALL, 5
 	);
 	SetSizerAndFit(vbox);
-	SetIcon(icon);
 }
 
 void MyFrame::onCopyToClipboard(wxCommandEvent&) {

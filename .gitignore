@@ -1,6 +1,6 @@
 # Waf
 build/
-.waf-*
+waf*/
 .lock-waf*
 
 # Visual Studio Code
