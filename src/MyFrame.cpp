@@ -11,12 +11,12 @@ enum {
 };
 
 MyFrame::MyFrame()
-: wxFrame(nullptr, wxID_ANY, "Password Calculator", wxDefaultPosition, wxSize(250, 150)),
+: wxFrame(nullptr, wxID_ANY, "Password Calculator"), panel(new wxPanel(this)),
 textAlias(new wxTextCtrl(
-	this, ID_ALIAS, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER
+	panel, ID_ALIAS, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER
 )),
 textSecret(new wxTextCtrl(
-	this, ID_SECRET, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER | wxTE_PASSWORD
+	panel, ID_SECRET, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER | wxTE_PASSWORD
 )),
 icon("pwcalculator.svg") {
 #ifdef _WIN32
@@ -25,16 +25,17 @@ icon("pwcalculator.svg") {
 	SetIcon(icon);
 #endif
 	auto vbox = new wxBoxSizer(wxVERTICAL);
+	vbox->SetMinSize(258, 0);
 
 	vbox->Add(
 		textAlias,
-		1, wxEXPAND | wxALL, 5
+		1, wxEXPAND | wxALL, 10
 	);
 	vbox->Add(
 		textSecret,
-		1, wxEXPAND | wxALL, 5
+		1, wxEXPAND | wxALL, 10
 	);
-	auto button = new wxButton(this, wxID_ANY, "Copy to clipboard");
+	auto button = new wxButton(panel, wxID_ANY, "Copy to clipboard");
 	Connect(
 		wxID_ANY, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::onCopyToClipboard)
 	);
@@ -42,9 +43,10 @@ icon("pwcalculator.svg") {
 	Connect(ID_SECRET, wxEVT_TEXT_ENTER, wxCommandEventHandler(MyFrame::onCopyToClipboard));
 	button->SetDefault();
 	vbox->Add(
-		button, 1, wxEXPAND | wxALL, 5
+		button, 1, wxEXPAND | wxALL, 10
 	);
-	SetSizerAndFit(vbox);
+	panel->SetSizer(vbox);
+	vbox->SetSizeHints(this);
 }
 
 void MyFrame::onCopyToClipboard(wxCommandEvent&) {

@@ -8,6 +8,7 @@ public:
 private:
 	void onCopyToClipboard(wxCommandEvent&);
 
+	wxPanel* panel;
 	wxTextCtrl* textAlias;
 	wxTextCtrl* textSecret;
 	wxTimer timer;
