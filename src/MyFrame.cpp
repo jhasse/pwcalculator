@@ -25,15 +25,19 @@ icon("pwcalculator.svg") {
 	SetIcon(icon);
 #endif
 	auto vbox = new wxBoxSizer(wxVERTICAL);
-	vbox->SetMinSize(258, 0);
+	vbox->SetMinSize(200, 0);
 
+	vbox->Add(new wxStaticText(panel, wxID_ANY, "Alias:"), 0, wxLEFT | wxRIGHT | wxTOP, 9);
+	vbox->AddSpacer(2);
 	vbox->Add(
 		textAlias,
-		1, wxEXPAND | wxALL, 10
+		0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 9
 	);
+	vbox->Add(new wxStaticText(panel, wxID_ANY, "Secret:"), 0, wxLEFT | wxRIGHT | wxTOP, 9);
+	vbox->AddSpacer(2);
 	vbox->Add(
 		textSecret,
-		1, wxEXPAND | wxALL, 10
+		0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 9
 	);
 	auto button = new wxButton(panel, wxID_ANY, "Copy to clipboard");
 	Connect(
@@ -42,8 +46,9 @@ icon("pwcalculator.svg") {
 	Connect(ID_ALIAS, wxEVT_TEXT_ENTER, wxCommandEventHandler(MyFrame::onCopyToClipboard));
 	Connect(ID_SECRET, wxEVT_TEXT_ENTER, wxCommandEventHandler(MyFrame::onCopyToClipboard));
 	button->SetDefault();
+	vbox->AddSpacer(9);
 	vbox->Add(
-		button, 1, wxEXPAND | wxALL, 10
+		button, 1, wxEXPAND | wxALL, 9
 	);
 	panel->SetSizer(vbox);
 	vbox->SetSizeHints(this);
