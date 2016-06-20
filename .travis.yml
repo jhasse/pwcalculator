@@ -1,9 +1,12 @@
+language: cpp
+compiler:
+- gcc
+- clang
 os:
 - linux
 - osx
-install:
-- |
-  [ $TRAVIS_OS_NAME = osx ] && brew install wxmac
+before_install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install wxmac; fi
 addons:
   apt:
     packages:
