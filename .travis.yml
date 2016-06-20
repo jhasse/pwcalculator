@@ -1,0 +1,12 @@
+os:
+- linux
+- osx
+install:
+- |
+  [ $TRAVIS_OS_NAME = osx ] && brew install wxmac
+addons:
+  apt:
+    packages:
+    - libwxgtk3.0-dev
+script:
+- ./waf configure build
