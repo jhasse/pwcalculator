@@ -10,8 +10,13 @@ Icon made by [Madebyoliver](http://www.flaticon.com/authors/madebyoliver) from
 
 ## Build and Run
 
-```
-./waf configure
-./waf
+```sh
+./waf configure build
 ./build/pwcalculator
+```
+
+## Install (Linux)
+
+```sh
+sudo ./waf install
 ```

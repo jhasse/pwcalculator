@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Password Calculator
+Type=Application
+Exec=pwcalculator
+Icon=pwcalculator
+Categories=Utility;

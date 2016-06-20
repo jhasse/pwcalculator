@@ -41,3 +41,6 @@ def build(ctx):
 		target='pwcalculator',
 		use='WXWIDGETS',
 	)
+
+	ctx.install_files('${PREFIX}/share/applications', 'pwcalculator.desktop')
+	ctx.install_files('${PREFIX}/share/icons', 'share/icons/pwcalculator.svg')

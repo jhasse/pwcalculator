@@ -4,6 +4,8 @@
 
 #include <wx/clipbrd.h>
 #include <wx/url.h>
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
 
 enum {
 	ID_ALIAS = wxID_HIGHEST + 1,
@@ -18,7 +20,10 @@ textAlias(new wxTextCtrl(
 textSecret(new wxTextCtrl(
 	panel, ID_SECRET, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER | wxTE_PASSWORD
 )),
-icon("pwcalculator.svg") {
+icon(
+	wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath() +
+	"/../share/icons/pwcalculator.svg"
+) {
 #ifdef _WIN32
 	SetIcon(wxICON(MAINICON));
 #else
