@@ -8,6 +8,20 @@ Icon made by [Madebyoliver](http://www.flaticon.com/authors/madebyoliver) from
 [www.flaticon.com](http://www.flaticon.com) is licensed by
 [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/).
 
+## Dependencies
+
+### Fedora Linux
+
+```sh
+sudo dnf install gcc-c++ wxGTK3-devel openssl-devel boost-devel
+```
+
+Workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1128365:
+
+```sh
+sudo ln -s /usr/bin/wx-config-3.0 /usr/local/bin/wx-config
+```
+
 ## Build and Run
 
 ```sh
