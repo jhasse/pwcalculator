@@ -42,5 +42,5 @@ def build(ctx):
 		use='WXWIDGETS',
 	)
 
-	ctx.install_files('${PREFIX}/share/applications', 'pwcalculator.desktop')
+	ctx.install_files('${PREFIX}/share/applications', 'com.bixense.PasswordCalculator.desktop')
 	ctx.install_files('${PREFIX}/share/icons', 'share/icons/pwcalculator.svg')
