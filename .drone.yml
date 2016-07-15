@@ -3,5 +3,5 @@ build:
   shell: mingw64
   pull: true
   commands:
-    - pacman -S --needed --noconfirm --noprogressbar mingw-w64-x86_64-wxWidgets mingw-w64-x86_64-gcc mingw-w64-x86_64-pkg-config mingw-w64-x86_64-openssl mingw-w64-x86_64-boost
+    - pacman -S --needed --noconfirm --noprogressbar mingw-w64-x86_64-wxWidgets mingw-w64-x86_64-gcc mingw-w64-x86_64-pkg-config mingw-w64-x86_64-openssl mingw-w64-x86_64-boost mingw-w64-x86_64-waf
     - waf configure build --release --color=yes
