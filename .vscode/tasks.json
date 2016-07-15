@@ -1,0 +1,60 @@
+{
+	"version": "0.1.0",
+	"windows": {
+		"command": "C:\\msys64\\usr\\bin\\bash"
+	},
+	"linux": {
+		"command": "/bin/bash"
+	},
+	"args": ["-lc", "cd \"\"${workspaceRoot}\"\" && waf $0 && $@"],
+	"isShellCommand": true,
+	"showOutput": "always",
+	"options": {
+		"env": {
+			"LANG": "C.UTF-8",
+			"PYTHONUNBUFFERD": "1",
+			"MSYSTEM": "MINGW64"
+		}
+	},
+	"tasks": [
+		{
+			"taskName": "build",
+			"isBuildCommand": true,
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": ["relative", "${workspaceRoot}/build/"],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|fatal error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		},
+		{
+			"taskName": "test",
+			"args": ["./build/unittest"],
+			"isTestCommand": true,
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": ["relative", "${workspaceRoot}/build/"],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error|fatal error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		},
+		{
+			"taskName": "configure"
+		},
+		{
+			"taskName": "clean"
+		}
+	]
+}
