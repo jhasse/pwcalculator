@@ -10,6 +10,12 @@ Icon made by [Madebyoliver](http://www.flaticon.com/authors/madebyoliver) from
 
 ## Dependencies
 
+### Ubuntu Linux
+
+```sh
+sudo apt install libssl-dev libwxgtk3.0-dev libboost-dev
+```
+
 ### Fedora Linux
 
 ```sh
@@ -32,5 +38,6 @@ sudo ln -s /usr/bin/wx-config-3.0 /usr/local/bin/wx-config
 ## Install (Linux)
 
 ```sh
+./waf configure build --release
 sudo ./waf install
 ```
