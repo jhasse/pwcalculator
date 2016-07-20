@@ -40,4 +40,5 @@ sudo ln -s /usr/bin/wx-config-3.0 /usr/local/bin/wx-config
 ```sh
 ./waf configure build --release
 sudo ./waf install
+sudo chmod +x /usr/local/share/applications/com.bixense.PasswordCalculator.desktop
 ```
