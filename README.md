@@ -22,12 +22,6 @@ sudo apt install libssl-dev libwxgtk3.0-dev libboost-dev
 sudo dnf install gcc-c++ wxGTK3-devel openssl-devel boost-devel
 ```
 
-Workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1128365:
-
-```sh
-sudo ln -s /usr/bin/wx-config-3.0 /usr/local/bin/wx-config
-```
-
 ## Build and Run
 
 ```sh
