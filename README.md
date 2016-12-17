@@ -22,14 +22,21 @@ sudo apt install libssl-dev libwxgtk3.0-dev libboost-dev
 sudo dnf install gcc-c++ wxGTK3-devel openssl-devel boost-devel
 ```
 
+### Windows (MSYS2)
+
+```sh
+pacman -S mingw-w64-x86_64-wxWidgets mingw-w64-x86_64-waf
+```
+
 ## Build and Run
 
 ```sh
-./waf configure build
+./waf configure build # Linux
+waf configure build # Windows (MSYS2)
 ./build/pwcalculator
 ```
 
-## Install (Linux)
+## Install (Linux only)
 
 ```sh
 ./waf configure build --release
