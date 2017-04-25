@@ -43,3 +43,12 @@ waf configure build # Windows (MSYS2)
 sudo ./waf install
 sudo chmod +x /usr/local/share/applications/com.bixense.PasswordCalculator.desktop
 ```
+
+## Creating a Flatpak
+
+```sh
+flatpak install gnome org.gnome.Sdk 3.22
+flatpak install gnome org.gnome.Platform 3.22
+flatpak-builder --repo=repo ./build com.bixense.PasswordCalculator.json
+flatpak build-bundle repo pwcalculator.flatpak com.bixense.PasswordCalculator
+```

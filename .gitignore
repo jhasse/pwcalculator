@@ -8,3 +8,4 @@ waf*/
 
 # Flatpak
 /.flatpak-builder/
+/repo/
