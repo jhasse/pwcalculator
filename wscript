@@ -2,7 +2,8 @@
 
 import os
 import sys
-from waflib import Options
+from waflib import Options, Configure
+Configure.autoconfig = True
 
 def options(ctx):
 	ctx.load('compiler_cxx')
@@ -43,4 +44,4 @@ def build(ctx):
 	)
 
 	ctx.install_files('${PREFIX}/share/applications', 'com.bixense.PasswordCalculator.desktop')
-	ctx.install_files('${PREFIX}/share/icons', 'share/icons/pwcalculator.svg')
+	ctx.install_files('${PREFIX}/share/icons', 'share/icons/com.bixense.PasswordCalculator.svg')

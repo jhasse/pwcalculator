@@ -5,3 +5,6 @@ waf*/
 
 # Visual Studio Code
 .vscode/.browse*
+
+# Flatpak
+/.flatpak-builder/

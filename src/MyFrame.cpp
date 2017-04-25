@@ -3,7 +3,6 @@
 #include "password.hpp"
 
 #include <wx/clipbrd.h>
-#include <wx/url.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 
@@ -22,7 +21,7 @@ textSecret(new wxTextCtrl(
 )),
 icon(
 	wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath() +
-	"/../share/icons/pwcalculator.svg"
+	"/../share/icons/com.bixense.PasswordCalculator.svg"
 ) {
 #ifdef _WIN32
 	SetIcon(wxICON(MAINICON));
