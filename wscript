@@ -45,3 +45,5 @@ def build(ctx):
 
 	ctx.install_files('${PREFIX}/share/applications', 'com.bixense.PasswordCalculator.desktop')
 	ctx.install_files('${PREFIX}/share/icons', 'share/icons/com.bixense.PasswordCalculator.svg')
+	ctx.install_files('${PREFIX}/share/appdata',
+	                  'share/appdata/com.bixense.PasswordCalculator.appdata.xml')
