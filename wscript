@@ -12,6 +12,14 @@ def options(ctx):
 	gr = ctx.get_option_group('configure options')
 	gr.add_option('--release', action='store_true', help='build release binaries')
 
+def check_flag(ctx, flag):
+	ctx.env.CXXFLAGS_TMP = ''
+	if not ctx.check_cxx(cxxflags=[flag], msg="Checking for '{}'".format(flag), mandatory=False,
+	                     uselib_store='TMP'):
+		return False
+	ctx.env.append_value('CXXFLAGS', ctx.env.CXXFLAGS_TMP)
+	return True
+
 def configure(ctx):
 	ctx.load('compiler_cxx')
 	if sys.platform in ["msys", "win32"]:
@@ -22,11 +30,13 @@ def configure(ctx):
 	else:
 		ctx.env.CXXFLAGS = ['-g']
 
-	ctx.env.append_value('CXXFLAGS', ['-Wall', '-Wextra', '-std=c++11'])
+	if not check_flag(ctx, '-std=c++11'):
+		ctx.env.append_value('CXXFLAGS', ['-std=c++0x'])
+	ctx.env.append_value('CXXFLAGS', ['-Wall', '-Wextra'])
 
 	if ((os.getenv("CLICOLOR", "1") != "0" and sys.stdout.isatty()) or
 	    os.getenv("CLICOLOR_FORCE", "0") != "0"):
-		ctx.env.append_value('CXXFLAGS', ['-fdiagnostics-color'])
+		check_flag(ctx, '-fdiagnostics-color')
 	ctx.check_cfg(
 		path='wx-config', args='--cflags --libs', package='',
 		uselib_store='WXWIDGETS'
