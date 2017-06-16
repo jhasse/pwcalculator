@@ -11,5 +11,6 @@ addons:
   apt:
     packages:
     - libwxgtk3.0-dev
+    - libboost-dev
 script:
 - ./waf configure build
