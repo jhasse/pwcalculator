@@ -1,0 +1,12 @@
+# Waf
+/build/
+/.waf*/
+/.lock-waf*
+
+# Visual Studio Code
+/.vscode/.browse*
+/.vscode/tags
+
+# Flatpak
+/.flatpak-builder/
+/repo/
