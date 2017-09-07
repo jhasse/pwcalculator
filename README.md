@@ -1,4 +1,4 @@
-# Password Calculator
+# Password Calculator [![Build Status](https://travis-ci.org/jhasse/pwcalculator.svg?branch=v1.1)](https://travis-ci.org/jhasse/pwcalculator)
 
 This app calculates strong passwords for each alias from your single secret. No need to remember
 dozens of passwords any longer and no need for a password manager! Based on this GNOME Shell
