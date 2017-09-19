@@ -47,8 +47,8 @@ sudo chmod +x /usr/local/share/applications/com.bixense.PasswordCalculator.deskt
 ## Creating a Flatpak
 
 ```sh
-flatpak install gnome org.gnome.Sdk 3.22
-flatpak install gnome org.gnome.Platform 3.22
+flatpak install gnome org.freedesktop.Sdk 1.6
+flatpak install gnome org.freedesktop.Platform 1.6
 flatpak-builder --repo=repo ./build com.bixense.PasswordCalculator.json
 flatpak build-bundle repo pwcalculator.flatpak com.bixense.PasswordCalculator
 ```
