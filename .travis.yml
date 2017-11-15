@@ -14,3 +14,4 @@ addons:
     - libboost-dev
 script:
 - ./waf configure build
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./waf mac; fi

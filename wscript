@@ -2,6 +2,7 @@
 
 import os
 import sys
+import zipfile
 from waflib import Options, Configure
 Configure.autoconfig = True
 
@@ -57,3 +58,7 @@ def build(ctx):
 	ctx.install_files('${PREFIX}/share/icons', 'share/icons/com.bixense.PasswordCalculator.svg')
 	ctx.install_files('${PREFIX}/share/appdata',
 	                  'share/appdata/com.bixense.PasswordCalculator.appdata.xml')
+
+def mac(ctx):
+	zipf = zipfile.ZipFile('Password Calculator.zip', 'w', zipfile.ZIP_DEFLATED)
+	zipf.write('build/pwcalculator', 'Password Calculator.app/Contents/MacOS/pwcalculator')
