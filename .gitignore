@@ -6,6 +6,7 @@
 # Visual Studio Code
 /.vscode/.browse*
 /.vscode/tags
+/.ccls-cache/
 
 # Flatpak
 /.flatpak-builder/
