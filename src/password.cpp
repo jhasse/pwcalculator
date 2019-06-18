@@ -1,6 +1,11 @@
 #include "password.hpp"
 
-#include <boost/uuid/sha1.hpp>
+#include <boost/version.hpp>
+#if BOOST_VERSION > 106800
+	#include <boost/uuid/detail/sha1.hpp>
+#else
+	#include <boost/uuid/sha1.hpp>
+#endif
 #include <boost/archive/iterators/base64_from_binary.hpp>
 #include <boost/archive/iterators/transform_width.hpp>
 #include <boost/algorithm/string.hpp>
