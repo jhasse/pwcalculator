@@ -42,7 +42,6 @@ def configure(ctx):
 		path='wx-config', args='--cflags --libs', package='',
 		uselib_store='WXWIDGETS'
 	)
-	ctx.check_cfg(args='--cflags --libs', package='openssl', uselib_store='OPENSSL')
 
 def build(ctx):
 	source_files = ctx.path.ant_glob('src/*.cpp')
