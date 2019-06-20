@@ -7,7 +7,7 @@ from waflib import Options, Configure
 Configure.autoconfig = True
 
 def options(ctx):
-	ctx.load('compiler_cxx')
+	ctx.load('compiler_cxx boost')
 	if sys.platform in ["msys", "win32"]:
 		ctx.load('winres')
 	gr = ctx.get_option_group('configure options')
@@ -22,7 +22,8 @@ def check_flag(ctx, flag):
 	return True
 
 def configure(ctx):
-	ctx.load('compiler_cxx')
+	ctx.load('compiler_cxx boost')
+	ctx.check_boost()
 	if sys.platform in ["msys", "win32"]:
 		ctx.load('winres')
 
@@ -40,7 +41,7 @@ def configure(ctx):
 		check_flag(ctx, '-fdiagnostics-color')
 	ctx.check_cfg(
 		path='wx-config', args='--cflags --libs', package='',
-		uselib_store='WXWIDGETS'
+		uselib_store='WXWIDGETS', msg='Checking for wxWidgets',
 	)
 
 def build(ctx):
@@ -50,7 +51,7 @@ def build(ctx):
 	ctx.program(
 		source=source_files,
 		target='pwcalculator',
-		use='WXWIDGETS',
+		use='WXWIDGETS BOOST',
 	)
 
 	ctx.install_files('${PREFIX}/share/applications', 'com.bixense.PasswordCalculator.desktop')
