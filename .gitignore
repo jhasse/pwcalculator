@@ -11,3 +11,6 @@
 # Flatpak
 /.flatpak-builder/
 /repo/
+
+# macOS
+.DS_Store
