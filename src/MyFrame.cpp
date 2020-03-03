@@ -12,7 +12,7 @@ enum {
 };
 
 MyFrame::MyFrame()
-: wxFrame(nullptr, wxID_ANY, "Password Calculator"), panel(new wxPanel(this)),
+: wxFrame(nullptr, wxID_ANY, wxTheApp->GetAppName()), panel(new wxPanel(this)),
 textAlias(new wxTextCtrl(
 	panel, ID_ALIAS, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER
 )),
@@ -56,6 +56,8 @@ icon(
 	);
 	panel->SetSizer(vbox);
 	vbox->SetSizeHints(this);
+
+	SetMenuBar(new wxMenuBar);
 }
 
 void MyFrame::onCopyToClipboard(wxCommandEvent&) {
