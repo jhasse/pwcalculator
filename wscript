@@ -1,7 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
+import shutil
+import subprocess
 import sys
+import tempfile
 import zipfile
 from waflib import Options, Configure
 Configure.autoconfig = True
@@ -60,5 +63,52 @@ def build(ctx):
 	                  'share/appdata/com.bixense.PasswordCalculator.appdata.xml')
 
 def mac(ctx):
-	zipf = zipfile.ZipFile('Password Calculator.zip', 'w', zipfile.ZIP_DEFLATED)
-	zipf.write('build/pwcalculator', 'Password Calculator.app/Contents/MacOS/pwcalculator')
+	with tempfile.TemporaryDirectory() as d:
+		iconset = os.path.join(d, 'Password Calculator.iconset')
+		os.mkdir(iconset)
+		subprocess.check_call(['sips', '-z', '16', '16', 'pwcalculator.png', '--out', '{}/icon_16x16.png'.format(iconset)])
+		subprocess.check_call(['sips', '-z', '32', '32', 'pwcalculator.png', '--out', '{}/icon_16x16@2x.png'.format(iconset)])
+		subprocess.check_call(['sips', '-z', '32', '32', 'pwcalculator.png', '--out', '{}/icon_32x32.png'.format(iconset)])
+		subprocess.check_call(['sips', '-z', '64', '64', 'pwcalculator.png', '--out', '{}/icon_32x32@2x.png'.format(iconset)])
+		subprocess.check_call(['sips', '-z', '128', '128', 'pwcalculator.png', '--out', '{}/icon_128x128.png'.format(iconset)])
+		shutil.copyfile('pwcalculator.png', '{}/icon_128x128@2x.png'.format(iconset))
+		shutil.copyfile('pwcalculator.png', '{}/icon_256x256.png'.format(iconset))
+		subprocess.check_call(['iconutil', '-c', 'icns', iconset])
+
+		zipf = zipfile.ZipFile('Password Calculator.zip', 'w', zipfile.ZIP_DEFLATED)
+		zipf.write(os.path.join(d, 'Password Calculator.icns'), 'Password Calculator.app/Contents/Resources/Password Calculator.icns')
+
+		subprocess.check_call(['dylibbundler', '-p', '@executable_path/../Frameworks/', '-x', 'build/pwcalculator', '-b', '-cd', '-d', os.path.join(d, 'Frameworks')])
+
+		for dirpath, dirs, files in os.walk(os.path.join(d, 'Frameworks')):
+			for f in files:
+				fn = os.path.join(dirpath, f)
+				zipf.write(fn, os.path.join('Password Calculator.app/Contents/Frameworks', f))
+
+		zipf.write('build/pwcalculator', 'Password Calculator.app/Contents/MacOS/pwcalculator')
+
+		with zipf.open('Password Calculator.app/Contents/Info.plist', 'w') as info:
+			info.write(b'''<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+	<plist version="1.0">
+	<dict>
+		<key>CFBundleName</key>
+		<string>Password Calculator</string>
+		<key>CFBundleDisplayName</key>
+		<string>Password Calculator</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.bixense.PasswordCalculator</string>
+		<key>CFBundleVersion</key>
+		<string>1.0.0</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleExecutable</key>
+		<string>pwcalculator</string>
+		<key>CFBundleIconFile</key>
+		<string>Password Calculator</string>
+		<key>NSPrincipalClass</key>
+		<string>NSApplication</string>
+	</dict>
+	</plist>''')
