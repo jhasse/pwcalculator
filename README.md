@@ -28,6 +28,12 @@ sudo dnf install gcc-c++ wxGTK3-devel openssl-devel boost-devel
 pacman -S mingw-w64-x86_64-wxWidgets mingw-w64-x86_64-waf
 ```
 
+### macOS
+
+```sh
+brew install wxmac dylibbundler
+```
+
 ## Build and Run
 
 ```sh
