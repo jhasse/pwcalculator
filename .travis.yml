@@ -6,7 +6,7 @@ os:
 - osx
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install wxmac dylibbundler; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install wxmac; fi
 addons:
   apt:
     packages:
@@ -14,4 +14,3 @@ addons:
     - libboost-dev
 script:
 - ./waf configure build
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./waf mac; fi
