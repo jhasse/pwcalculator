@@ -1,11 +1,18 @@
-build:
-  image: teaci/msys32
-  shell: mingw32
-  pull: true
+kind: pipeline
+type: docker
+name: flatpak
+
+steps:
+- name: build
+  image: fedora:29
   commands:
-    - pacman -S --needed --noconfirm --noprogressbar mingw-w64-i686-wxWidgets mingw-w64-i686-gcc mingw-w64-i686-pkg-config mingw-w64-i686-openssl mingw-w64-i686-boost mingw-w64-i686-waf python3
-    - waf configure build --release --color=yes
+  - dnf install -yq flatpak-builder
+  - flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  - flatpak install -y --noninteractive org.freedesktop.Sdk//18.08
+  - flatpak install -y --noninteractive runtime/org.freedesktop.Platform//18.08
+  - flatpak-builder --disable-rofiles-fuse --repo=repo ./build com.bixense.PasswordCalculator.json
+  - flatpak build-bundle repo pwcalculator.flatpak com.bixense.PasswordCalculator
   environment:
-    - CLICOLOR_FORCE=1
-    - PYTHONUNBUFFERED=1
-    - LANG=C.UTF-8
+    CLICOLOR_FORCE: "1"
+    PYTHONUNBUFFERED: "1"
+    LANG: C.UTF-8
